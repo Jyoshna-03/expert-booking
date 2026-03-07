@@ -16,24 +16,18 @@ export default function BookingForm({ expert, onBack, onSuccess }) {
 
   const handleSubmit = async () => {
     if (!form.name || !form.email || !form.phone || !form.date || !form.timeSlot) {
-      setError('All fields are required!')
-      return
+      setError('All fields are required!'); return
     }
     if (!/\S+@\S+\.\S+/.test(form.email)) {
-      setError('Please enter a valid email!')
-      return
+      setError('Please enter a valid email!'); return
     }
     if (!/^\d{10}$/.test(form.phone)) {
-      setError('Please enter a valid 10 digit phone number!')
-      return
+      setError('Please enter a valid 10 digit phone number!'); return
     }
-
     try {
       setLoading(true)
       setError('')
-      await axios.post('http://localhost:5000/bookings', {
-        expertId: expert._id, ...form
-      })
+      await axios.post('http://localhost:5000/bookings', { expertId: expert._id, ...form })
       setSuccess(true)
       setLoading(false)
       setTimeout(() => onSuccess(), 2000)
@@ -55,7 +49,7 @@ export default function BookingForm({ expert, onBack, onSuccess }) {
     <div style={{ padding: '30px', maxWidth: '600px', margin: '0 auto' }}>
       <button onClick={onBack} style={{
         background: '#e5e7eb', border: 'none', padding: '8px 16px',
-        borderRadius: '8px', marginBottom: '20px'
+        borderRadius: '8px', marginBottom: '20px', cursor: 'pointer'
       }}>← Back</button>
 
       <div style={{ background: 'white', borderRadius: '12px', padding: '25px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
@@ -70,23 +64,17 @@ export default function BookingForm({ expert, onBack, onSuccess }) {
         ].map(({ label, key, type, placeholder }) => (
           <div key={key} style={{ marginBottom: '15px' }}>
             <label style={{ display: 'block', marginBottom: '5px', color: '#374151', fontWeight: 'bold' }}>{label}</label>
-            <input
-              type={type}
-              placeholder={placeholder}
-              value={form[key]}
+            <input type={type} placeholder={placeholder} value={form[key]}
               onChange={e => setForm({ ...form, [key]: e.target.value })}
-              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc' }}
+              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', color: '#000', background: '#fff' }}
             />
           </div>
         ))}
 
         <div style={{ marginBottom: '15px' }}>
           <label style={{ display: 'block', marginBottom: '5px', color: '#374151', fontWeight: 'bold' }}>Date</label>
-          <select
-            value={form.date}
-            onChange={e => setForm({ ...form, date: e.target.value, timeSlot: '' })}
-            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc' }}
-          >
+          <select value={form.date} onChange={e => setForm({ ...form, date: e.target.value, timeSlot: '' })}
+            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', color: '#000', background: '#fff' }}>
             <option value="">Select a date</option>
             {availableDates.map(d => <option key={d} value={d}>{d}</option>)}
           </select>
@@ -94,12 +82,9 @@ export default function BookingForm({ expert, onBack, onSuccess }) {
 
         <div style={{ marginBottom: '15px' }}>
           <label style={{ display: 'block', marginBottom: '5px', color: '#374151', fontWeight: 'bold' }}>Time Slot</label>
-          <select
-            value={form.timeSlot}
-            onChange={e => setForm({ ...form, timeSlot: e.target.value })}
-            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc' }}
-            disabled={!form.date}
-          >
+          <select value={form.timeSlot} onChange={e => setForm({ ...form, timeSlot: e.target.value })}
+            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', color: '#000', background: '#fff' }}
+            disabled={!form.date}>
             <option value="">Select a time slot</option>
             {availableSlots.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
@@ -107,24 +92,17 @@ export default function BookingForm({ expert, onBack, onSuccess }) {
 
         <div style={{ marginBottom: '20px' }}>
           <label style={{ display: 'block', marginBottom: '5px', color: '#374151', fontWeight: 'bold' }}>Notes (Optional)</label>
-          <textarea
-            placeholder="Any special requirements..."
-            value={form.notes}
+          <textarea placeholder="Any special requirements..." value={form.notes}
             onChange={e => setForm({ ...form, notes: e.target.value })}
-            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', height: '80px' }}
+            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #ccc', height: '80px', color: '#000', background: '#fff' }}
           />
         </div>
 
-        <button
-          onClick={handleSubmit}
-          disabled={loading}
-          style={{
-            background: loading ? '#93c5fd' : '#2563eb', color: 'white',
-            border: 'none', padding: '12px 24px', borderRadius: '8px',
-            width: '100%', fontSize: '16px'
-          }}>
-          {loading ? 'Booking...' : 'Confirm Booking'}
-        </button>
+        <button onClick={handleSubmit} disabled={loading} style={{
+          background: loading ? '#93c5fd' : '#2563eb', color: 'white',
+          border: 'none', padding: '12px 24px', borderRadius: '8px',
+          width: '100%', fontSize: '16px', cursor: 'pointer'
+        }}>{loading ? 'Booking...' : 'Confirm Booking'}</button>
       </div>
     </div>
   )

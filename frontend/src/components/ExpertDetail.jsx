@@ -19,14 +19,14 @@ export default function ExpertDetail({ expert, onBook, onBack }) {
     <div style={{ padding: '30px', maxWidth: '800px', margin: '0 auto' }}>
       <button onClick={onBack} style={{
         background: '#e5e7eb', border: 'none', padding: '8px 16px',
-        borderRadius: '8px', marginBottom: '20px'
+        borderRadius: '8px', marginBottom: '20px', cursor: 'pointer'
       }}>← Back</button>
 
       <div style={{ background: 'white', borderRadius: '12px', padding: '25px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
         <div style={{ fontSize: '60px', textAlign: 'center', marginBottom: '15px' }}>👨‍💼</div>
         <h2 style={{ color: '#1e3a8a', textAlign: 'center' }}>{expert.name}</h2>
         <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '5px' }}>📁 {expert.category}</p>
-        <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '5px' }}>💼 {expert.experience} years experience</p>
+        <p style={{ textAlign: 'center', color: '#6b7280', marginBottom: '5px' }}>💼 {expert.experience} years</p>
         <p style={{ textAlign: 'center', color: '#f59e0b', marginBottom: '15px' }}>⭐ {expert.rating}/5</p>
         <p style={{ textAlign: 'center', color: '#374151', marginBottom: '25px' }}>{expert.bio}</p>
 
@@ -41,8 +41,7 @@ export default function ExpertDetail({ expert, onBook, onBack }) {
                   <span key={slot} style={{
                     padding: '6px 14px', borderRadius: '20px',
                     background: isBooked ? '#fee2e2' : '#dcfce7',
-                    color: isBooked ? '#dc2626' : '#16a34a',
-                    fontSize: '14px'
+                    color: isBooked ? '#dc2626' : '#16a34a', fontSize: '14px'
                   }}>
                     {slot} {isBooked ? '❌' : '✅'}
                   </span>
@@ -55,10 +54,8 @@ export default function ExpertDetail({ expert, onBook, onBack }) {
         <button onClick={() => onBook(expert)} style={{
           background: '#2563eb', color: 'white', border: 'none',
           padding: '12px 24px', borderRadius: '8px', width: '100%',
-          fontSize: '16px', marginTop: '20px'
-        }}>
-          Book Session
-        </button>
+          fontSize: '16px', marginTop: '20px', cursor: 'pointer'
+        }}>Book Session</button>
       </div>
     </div>
   )
